@@ -23,6 +23,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
+        working-directory: OC01/demo
         run: mvn clean package -DskipTests
 
       - name: Build Docker image
