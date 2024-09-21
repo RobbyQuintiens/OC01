@@ -35,10 +35,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          # Replace ${DOCKER_USERNAME} with your Docker Hub username
           docker build -t demo:latest .
 
       - name: Push Docker image
         run: |
-          # Push the image to the repository under your Docker Hub username
           docker push demo:latest
