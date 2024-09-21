@@ -16,8 +16,8 @@ COPY src ./src
 # Build the project and skip tests
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the application using a lightweight JRE image
-FROM eclipse-temurin:21-jre-slim
+# Stage 2: Run the application using the Java 21 JRE
+FROM eclipse-temurin:21-jre
 
 # Set the working directory for the runtime
 WORKDIR /app
