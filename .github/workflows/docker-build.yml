@@ -29,7 +29,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd demo
-          docker build -t demo:${{ github.sha }} .
+          docker build -t demo:${{ github.sha::7 }} .
 
       - name: Log in to Docker Hub
         env:
@@ -40,4 +40,4 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push ${DOCKER_USERNAME}/demo:${{ github.sha }}
+          docker push ${DOCKER_USERNAME}/demo:${{ github.sha::7 }}
