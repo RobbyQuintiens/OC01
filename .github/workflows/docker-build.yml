@@ -26,18 +26,29 @@ jobs:
         working-directory: demo
         run: mvn clean package -DskipTests
 
+      # Debugging step to print values
+      - name: Print debug info
+        run: |
+          echo "GitHub SHA: ${{ github.sha }}"
+          echo "Shortened SHA: ${{ github.sha::7 }}"
+          echo "Docker username: ${DOCKER_USERNAME}"
+
       - name: Build Docker image
         run: |
           cd demo
-          docker build -t ${DOCKER_USERNAME}/demo:${{ github.sha::7 }} .
+          SHORT_SHA="${{ github.sha::7 }}"  # Shorten the commit SHA
+          echo "Building image with tag: ${DOCKER_USERNAME}/demo:${SHORT_SHA}"
+          docker build -t ${DOCKER_USERNAME}/demo:${SHORT_SHA} .
 
       - name: Log in to Docker Hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+          echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
 
       - name: Push Docker image
         run: |
-          docker push ${DOCKER_USERNAME}/demo:${{ github.sha::7 }}
+          SHORT_SHA="${{ github.sha::7 }}"  # Shorten the commit SHA
+          echo "Pushing image: ${DOCKER_USERNAME}/demo:${SHORT_SHA}"
+          docker push ${DOCKER_USERNAME}/demo:${SHORT_SHA}
