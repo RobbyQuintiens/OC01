@@ -1,6 +1,6 @@
 FROM maven:3.8.5-openjdk-11 AS build
 
-WORKDIR /demo
+WORKDIR demo
 
 COPY pom.xml .
 COPY src ./src
