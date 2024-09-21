@@ -28,7 +28,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t demo:${{ github.sha }} ../../demo
+          cd demo
+          docker build -t myapp:1.0 .
 
       - name: Log in to Docker Hub
         env:
