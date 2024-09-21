@@ -40,5 +40,4 @@ jobs:
 
       - name: Push Docker image
         run: |
-          cd demo
-          docker push demo:${{ github.sha }}
+          docker push ${DOCKER_USERNAME}/demo:${{ github.sha }}
