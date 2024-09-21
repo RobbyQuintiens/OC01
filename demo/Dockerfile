@@ -1,6 +1,6 @@
 FROM maven:3.8.5-openjdk-11 AS build
 
-WORKDIR demo
+WORKDIR /demo
 
 COPY pom.xml .
 COPY src ./src
@@ -8,9 +8,9 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:11-jre-slim
   
-WORKDIR /demo1
+WORKDIR /demo
 
-COPY --from=build demo/target/*.jar demo.jar
+COPY --from=build /demo/target/*.jar demo.jar
 
 EXPOSE 8080
   
