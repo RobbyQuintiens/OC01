@@ -24,7 +24,9 @@ jobs:
 
       - name: Build with Maven
         working-directory: demo
-        run: mvn clean package -DskipTests
+        run: |
+          cd demo
+          mvn clean package -DskipTests
 
       - name: Build Docker image
         run: |
@@ -40,4 +42,5 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push OC01/demo:${{ github.sha }}
+          cd demo
+          docker push demo:${{ github.sha }}
