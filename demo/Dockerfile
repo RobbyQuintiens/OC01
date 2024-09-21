@@ -1,5 +1,9 @@
 FROM maven:3.8.5-openjdk-11 AS build
 
+RUN apt-get update && \
+    apt-get install -y maven && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR demo
 
 COPY pom.xml .
