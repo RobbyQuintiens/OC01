@@ -29,7 +29,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd demo
-          docker build -t demo:001.
+          docker build -t demo:001 .
 
       - name: Log in to Docker Hub
         env:
