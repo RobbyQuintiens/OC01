@@ -24,9 +24,7 @@ jobs:
 
       - name: Build with Maven
         working-directory: demo
-        run: |
-          cd demo
-          mvn clean package -DskipTests
+        run: mvn clean package -DskipTests
 
       - name: Build Docker image
         run: |
